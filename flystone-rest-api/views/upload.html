@@ -1,0 +1,23 @@
+<html lang="ja"></html>
+<head>
+    <meta charset="UTF-8">
+    <title>Express.js File Upload</title>
+</head>
+<body>
+    <h1>ファイルアップロード</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <div>●単一ファイルのアップロード</div>
+        <input type="file" name="file">
+        <button type="submit"  id="singleUploadButton" >送信</button>
+    </form>
+    <br>
+     <!-- 追加 -->
+    <!-- 複数ファイルアップロードフォーム -->
+    <form action="/multiple" method="POST" enctype="multipart/form-data">
+        <div>●複数ファイルアップロード</div>
+        <input type="file"  name="files" id="multipleUpload" multiple>
+        <button type="submit" id="multipleUploadButton" >送信</button>
+    </form>
+   
+</body>
+</html>
