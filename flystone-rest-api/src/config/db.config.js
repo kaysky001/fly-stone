@@ -1,6 +1,6 @@
 module.exports = {
-  HOST: 'localhost',
-  USER: 'hailang',
-  PASSWORD: '110119',
-  DB: 'flystone',
+  HOST: "localhost",
+  USER: "root",
+  PASSWORD: "kaku123456",
+  DB: "flystone",
 };
