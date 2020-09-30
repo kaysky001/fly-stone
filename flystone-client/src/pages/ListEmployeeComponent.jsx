@@ -16,9 +16,7 @@ class ListEmployeeComponent extends Component {
   deleteEmployee(id) {
     EmployeeService.deleteEmployee(id).then((res) => {
       this.setState({
-        employees: this.state.employees.filter(
-          (employee) => employee.id !== id
-        ),
+        employees: this.state.employees.filter((employee) => employee.id !== id),
       });
     });
   }
@@ -52,8 +50,7 @@ class ListEmployeeComponent extends Component {
             <h5>職員情報一覧</h5>
           </div>
           <div className="col-2 text-right">
-            <button className="btn btn-warning btn-sm rounded-pill"
-              onClick={this.logout.bind(this)}>
+            <button className="btn btn-warning btn-sm rounded-pill" onClick={this.logout.bind(this)}>
               ログアウト
             </button>
           </div>
@@ -73,15 +70,12 @@ class ListEmployeeComponent extends Component {
             <tbody>
               {this.state.employees.map((employee) => (
                 <tr key={employee.id}>
-                  <td className='text-center'> {employee.id} </td>
+                  <td className="text-center"> {employee.id} </td>
                   <td> {employee.first_name} </td>
                   <td> {employee.last_name}</td>
                   <td> {employee.email_id}</td>
                   <td>
-                    <button
-                      onClick={() => this.editEmployee(employee.id)}
-                      className="btn btn-info btn-sm"
-                    >
+                    <button onClick={() => this.editEmployee(employee.id)} className="btn btn-info btn-sm">
                       修正{' '}
                     </button>
                     <button
@@ -105,11 +99,7 @@ class ListEmployeeComponent extends Component {
           </table>
         </div>
         <div className="row">
-          <button
-            className="btn btn-primary btn-sm rounded-pill"
-            onClick={this.addEmployee}
-          >
-            {' '}
+          <button className="btn btn-primary btn-sm rounded-pill" onClick={this.addEmployee}>
             新規採用
           </button>
         </div>
