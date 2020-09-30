@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class ResumeWrite extends Component {
   //入力情報を保持するstate
@@ -23,7 +23,6 @@ class ResumeWrite extends Component {
     this.nearChange = this.nearChange.bind(this);
     this.remarkChange = this.remarkChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.endDateEmpty = this.endDateEmpty.bind(this);
   }
   //各情報をstateに格納するメソッド
   startChange(e) {
@@ -66,25 +65,57 @@ class ResumeWrite extends Component {
       remarks: e.target.value,
     });
   }
-  endDateEmpty() {
-    this.setState({
-      endDate: "2099/12/31",
-    });
-  }
 
   //確認画面にstateを送信する。
   handleClick() {
-    const regex = RegExp("^[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$");
-    if (regex.test(this.state.startDate)) {
-      if (this.state.endDate === null) {
+    let startDate = this.state.startDate;
+    let endDate = this.state.endDate;
+    const reg = new RegExp('^[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$');
+    if (startDate === null || startDate === '') {
+      this.setState({
+        error: '開始年月日は入力必須',
+      });
+    } else if (!reg.test(startDate)) {
+      this.setState({
+        error: '開始年月日と終了年月日はYYYY/MM/DDで入力してください。',
+      });
+    } else if (!(endDate === null || endDate === '')) {
+      if (!(reg.test(startDate) && reg.test(endDate))) {
         this.setState({
-          endDate: "2099/12/31",
+          error: '開始年月日と終了年月日はYYYY/MM/DDで入力してください。',
         });
-      } else if (regex.test(this.state.endDate)) {
       } else {
+        this.props.history.push({
+          pathname: '/resume/write/conf',
+          state: {
+            startDate: this.state.startDate,
+            endDate: this.state.endDate,
+            workPlace: this.state.workPlace,
+            customer: this.state.customer,
+            position: this.state.position,
+            project: this.state.project,
+            nearStation: this.state.nearStation,
+            remarks: this.state.remarks,
+          },
+        });
       }
+    } else if (endDate === null || endDate === '') {
       this.props.history.push({
-        pathname: "/resume/write/conf",
+        pathname: '/resume/write/conf',
+        state: {
+          startDate: this.state.startDate,
+          endDate: '2099/12/31',
+          workPlace: this.state.workPlace,
+          customer: this.state.customer,
+          position: this.state.position,
+          project: this.state.project,
+          nearStation: this.state.nearStation,
+          remarks: this.state.remarks,
+        },
+      });
+    } else {
+      this.props.history.push({
+        pathname: '/resume/write/conf',
         state: {
           startDate: this.state.startDate,
           endDate: this.state.endDate,
@@ -96,8 +127,6 @@ class ResumeWrite extends Component {
           remarks: this.state.remarks,
         },
       });
-    } else {
-      console.log("正規表現エラー");
     }
   }
   //前の画面に戻る
@@ -123,11 +152,7 @@ class ResumeWrite extends Component {
               >
                 戻る
               </button>
-              <button
-                type="button"
-                className="btn btn-warning btn-sm rounded-pill"
-                id="logout"
-              >
+              <button type="button" className="btn btn-warning btn-sm rounded-pill" id="logout">
                 ログアウト
               </button>
             </div>
@@ -140,86 +165,46 @@ class ResumeWrite extends Component {
               <div className="form-group row">
                 <div className="col-lg-6">
                   <label htmlFor="startDate">開始年月:</label>
-                  <input
-                    type="text"
-                    id="startDate"
-                    className="form-control"
-                    onChange={this.startChange}
-                  />
+                  <input type="text" id="startDate" className="form-control" onChange={this.startChange} />
                 </div>
                 <div className="col-lg-6">
                   <label htmlFor="endDate">終了年月:</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="endDate"
-                    onChange={this.endChange}
-                  />
+                  <input type="text" className="form-control" id="endDate" onChange={this.endChange} />
                 </div>
               </div>
               <div className="form-group row">
                 <div className="col-lg-6">
                   <label htmlFor="workPlace">勤務先:</label>
-                  <input
-                    type="text"
-                    id="workPlace"
-                    className="form-control"
-                    onChange={this.placeChange}
-                  />
+                  <input type="text" id="workPlace" className="form-control" onChange={this.placeChange} />
                 </div>
                 <div className="col-lg-6">
                   <label htmlFor="customer">取引先:</label>
-                  <input
-                    type="text"
-                    id="customer"
-                    className="form-control"
-                    onChange={this.customerChange}
-                  />
+                  <input type="text" id="customer" className="form-control" onChange={this.customerChange} />
                 </div>
               </div>
               <div className="form-group row">
                 <div className="col-lg-4">
                   <label htmlFor="position">役割:</label>
-                  <input
-                    type="text"
-                    id="position"
-                    className="form-control"
-                    onChange={this.positionChange}
-                  />
+                  <input type="text" id="position" className="form-control" onChange={this.positionChange} />
                 </div>
                 <div className="col-lg-8">
                   <label htmlFor="project">プロジェクト名:</label>
-                  <input
-                    type="text"
-                    id="project"
-                    className="form-control"
-                    onChange={this.projectChange}
-                  />
+                  <input type="text" id="project" className="form-control" onChange={this.projectChange} />
                 </div>
               </div>
               <div className="row">
                 <div className="form-group col-lg-12">
                   <label htmlFor="nearestStation">最寄駅:</label>
-                  <input
-                    type="text"
-                    id="nearestStation"
-                    className="form-control"
-                    onChange={this.nearChange}
-                  />
+                  <input type="text" id="nearestStation" className="form-control" onChange={this.nearChange} />
                 </div>
               </div>
               <div className="row">
                 <div className="form-group col-lg-12">
                   <label htmlFor="remarks">備考:</label>
-                  <input
-                    type="text"
-                    id="remarks"
-                    className="form-control"
-                    onChange={this.remarkChange}
-                  />
+                  <input type="text" id="remarks" className="form-control" onChange={this.remarkChange} />
                 </div>
               </div>
-              <ul id="errorArea"></ul>
+              <p style={{ color: 'red' }}>{this.state.error}</p>
               <div className="text-center">
                 <button
                   type="button"
