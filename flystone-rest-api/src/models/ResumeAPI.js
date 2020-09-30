@@ -10,8 +10,6 @@ module.exports = {
         //登録更新時間設定
         let createDate = new Date().toFormat("YYYY/MM/DD HH24:MI:SS");
         let updateDate = new Date().toFormat("YYYY/MM/DD HH24:MI:SS");
-        // const createDate = new Date();
-        // const updateDate = new Date();
         return new Promise((resolve, reject) => {
             sql.query(
                 `INSERT INTO ${table}(
