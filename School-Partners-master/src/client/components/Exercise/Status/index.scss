@@ -1,0 +1,146 @@
+@import '../../../styles/iconfont';
+
+.dark {
+  background: #333;
+}
+
+.light {
+  background: #fff;
+}
+
+.care {
+  background: #cce8cf;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tag {
+  margin-left: .2em;
+}
+
+.setting-open {
+  transform: translate3d(0, -16em, 0);  
+}
+
+.exam-status {
+  position: fixed;
+  left: 0;
+  bottom: -16em;
+  width: 100vw;
+  height: 19em;
+  transition: transform .25s ease;
+
+  .exam-footer {
+    @extend .flex;
+    justify-content: space-between;
+    height: 3em;
+    padding: 0 .5em;
+    color: #666;
+    border-top: rgba(102, 102, 102, .5) 1px solid;
+    border-bottom: rgba(241, 241, 241, .5) 1px solid;
+
+    .star {
+      .iconfont {
+        display: inline-block;
+        color: #666;
+        font-size: 1em;
+      }
+    }
+
+    .progress {
+      .iconfont {
+        display: inline-block;
+        color: #fa4b2a;
+        font-size: 1em;
+      }
+
+      .tag {
+        font-weight: bold;
+      }
+    }
+
+    .setting {
+      .iconfont {
+        display: inline-block;
+        color: #66a6ff;
+        font-size: 1em;
+      }
+
+      .tag {
+        font-size: 1em;
+        line-height: 1em;
+      }
+    }
+  }
+
+  .exam-setting {
+    height: 16em;
+
+    .font-setting {
+      padding: 1em 0;
+
+      .font-size {
+        @extend .flex;
+        flex-direction: column;
+        font-weight: bold;
+      }
+    }
+
+    .theme-setting {
+      @extend .flex;
+      justify-content: space-around;
+
+
+      .theme-wrap {
+        @extend .flex;
+        flex-direction: column;
+        justify-content: space-around;
+        opacity: .8;
+
+        .theme-icon {
+          @extend .flex;
+
+          width: 3em;
+          height: 3em;
+          margin-bottom: .2em;
+          text-align: center;
+          border: #999 2px solid;
+          border-radius: 50%;
+
+          .iconfont {
+            font-size: 2em;
+          }
+        }
+      }
+
+      .active {
+        opacity: 1 !important;
+
+        .theme-icon {
+          color: #fff;
+          border: none;
+          background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+        }
+      }
+    }
+  }
+}
+
+.float-layout-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+}
+
+.setting-mass {
+  display: block;
+  opacity: .1;
+}

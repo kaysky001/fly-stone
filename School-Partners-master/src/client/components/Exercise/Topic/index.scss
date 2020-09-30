@@ -1,0 +1,36 @@
+.smaller {
+  font-size: 1em;
+}
+
+.small {
+  font-size: 1.2em;
+}
+
+.normal {
+  font-size: 1.4em;
+}
+
+.large {
+  font-size: 1.6em;
+}
+
+.larger {
+  font-size: 1.8em;
+}
+
+.exam-topic {
+  padding: .5em .8em 0 .8em;
+  line-height: 1.8em;
+
+  .type {
+    display: inline-block;
+    width: 3em;
+    height: 1.6em;
+    color: #fff;
+    line-height: 1.6em;
+    text-align: center;
+    background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+    border-radius: .8em;
+    transform: scale(0.8, 0.8)
+  }
+}
