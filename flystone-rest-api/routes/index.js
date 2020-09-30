@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-var resumeController = require("../controllers/resume-controller");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -71,6 +70,7 @@ router.post('/multiple', upload.array('files'), function(req, res, next) {
 });
 
 /* 職歴作成 */
+var resumeController = require("../src/controllers/resume-controller");
 router.post("/resume", resumeController.create);
 /* 職歴全検索 */
 router.get("/resume", resumeController.findAll);

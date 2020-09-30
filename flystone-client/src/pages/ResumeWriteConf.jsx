@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import axios from "axios";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 //職歴登録確認画面
 class ResumeWriteConf extends Component {
@@ -33,9 +33,9 @@ class ResumeWriteConf extends Component {
       remarks: this.state.remarks,
     };
     axios
-      .post("/resume", data)
+      .post('http://localhost:8888/api/v1/resume', data)
       .then((response) => {
-        this.props.history.push("/resume/write/comp");
+        this.props.history.push('http://localhost:3000/resume/write/comp');
       })
       .catch(function (error) {
         console.log(error);
@@ -60,11 +60,7 @@ class ResumeWriteConf extends Component {
               >
                 戻る
               </button>
-              <button
-                type="button"
-                className="btn btn-warning btn-sm rounded-pill"
-                id="logout"
-              >
+              <button type="button" className="btn btn-warning btn-sm rounded-pill" id="logout">
                 ログアウト
               </button>
             </div>
@@ -74,28 +70,20 @@ class ResumeWriteConf extends Component {
           <div className="col-lg-12">
             <div className="row">
               <div className="col-lg-6">
-                <label htmlFor="retire_date">
-                  開始年月日:{this.state.startDate}
-                </label>
+                <label htmlFor="retire_date">開始年月日:{this.state.startDate}</label>
               </div>
               <div className="col-lg-6">
-                <label htmlFor="retire_reason">
-                  終了年月:{this.state.endDate}
-                </label>
+                <label htmlFor="retire_reason">終了年月:{this.state.endDate}</label>
               </div>
             </div>
             <div className="row">
               <div className="col-lg-12">
-                <label htmlFor="retire_date">
-                  勤務先:{this.state.workPlace}
-                </label>
+                <label htmlFor="retire_date">勤務先:{this.state.workPlace}</label>
               </div>
             </div>
             <div className="row">
               <div className="col-lg-12">
-                <label htmlFor="retire_date">
-                  プロジェクト名:{this.state.project}
-                </label>
+                <label htmlFor="retire_date">プロジェクト名:{this.state.project}</label>
               </div>
             </div>
             <div className="row">
@@ -105,16 +93,12 @@ class ResumeWriteConf extends Component {
             </div>
             <div className="row">
               <div className="col-lg-12">
-                <label htmlFor="retire_date">
-                  取引先:{this.state.customer}
-                </label>
+                <label htmlFor="retire_date">取引先:{this.state.customer}</label>
               </div>
             </div>
             <div className="row">
               <div className="col-lg-12">
-                <label htmlFor="retire_date">
-                  最寄駅:{this.state.nearStation}
-                </label>
+                <label htmlFor="retire_date">最寄駅:{this.state.nearStation}</label>
               </div>
             </div>
             <div className="row">

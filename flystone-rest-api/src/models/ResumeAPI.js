@@ -1,6 +1,8 @@
-const sql = require('../utils/utils.js').connection;
-
-
+const sql = require("../utils/utils.js").connection;
+//時刻取得のため
+require("date-utils");
+//ターブル設定
+const table = "job_history";
 //職務履歴情報テーブルのAPI
 module.exports = {
     create: function(body) {

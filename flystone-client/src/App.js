@@ -24,9 +24,8 @@ function App() {
             <Route path="/add-employee/:id" component={CreateEmployeeComponent}></Route>
             <Route path="/view-employee/:id" component={ViewEmployeeComponent}></Route>
             <Route exact path="/resume/write" component={ResumeWriteComponent}></Route>
-            <Route exact path="/resume/write/conf" component={ResumeWriteConf} />
-            <Route exact path="/resume/write/comp" component={ResumeWriteComp} />
-
+            <Route exact path="/resume/write/conf" component={ResumeWriteConf}></Route>
+            <Route exact path="/resume/write/comp" component={ResumeWriteComp}></Route>
             {/*< Route path = "/update-employee/:id"
             component = { UpdateEmployeeComponent }> </Route> 
             */}
