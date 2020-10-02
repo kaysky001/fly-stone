@@ -5,24 +5,9 @@ const Resume = require("../models/ResumeAPI");
 module.exports = {
     //職務履歴テーブルに登録
     create: async function(req, res, next) {
-        try {
-            const resume = await Resume.create(req.body);
-            //更新成功判断
-            if (resume.affectedRows > 0) {
-                res.json({
-                    statusCode: 200,
-                    message: "職務履歴情報を登録しました。",
-                });
-            } else {
-                res.status(400).send({
-                    errorCode: 400,
-                    errorMessage: "職務履歴情報の登録が失敗しました",
-                });
-            }
-            //エラーcatch
-        } catch (error) {
-            res.status(500).send("サーバーエラー");
-        }
+        Resume.create(req.body).then((result) => {
+            res.json({ resume: result });
+        });
     },
     //職務履歴をすべて取得
     findAll: async function(req, res, next) {
