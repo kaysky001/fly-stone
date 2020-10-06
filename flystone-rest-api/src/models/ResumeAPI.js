@@ -101,18 +101,4 @@ module.exports = {
             });
         });
     },
-    searchById: function(body, staffNumber) {
-        return new Promise((resolve, reject) => {
-            sql.query(
-                `SELECT * FROM ${table} WHERE staff_number=${staffNumber} AND create_date=${body.createDate}`,
-                (err, result, fields) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(result);
-                    }
-                }
-            );
-        });
-    },
 };
