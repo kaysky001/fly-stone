@@ -38,8 +38,8 @@ class ResumeWriteConf extends Component {
       .then((response) => {
         this.props.history.push('/resume/write/comp');
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((error) => {
+        this.props.history.push('/error/system');
       });
   };
 

@@ -78,12 +78,12 @@ class ResumeWrite extends Component {
       });
     } else if (!reg.test(startDate)) {
       this.setState({
-        error: '開始年月日と終了年月日はYYYY/MM/DDで入力してください。',
+        error: '開始年月日と終了年月日はyyyy/MM/ddで入力してください。',
       });
     } else if (!(endDate === null || endDate === '')) {
       if (!(reg.test(startDate) && reg.test(endDate))) {
         this.setState({
-          error: '開始年月日と終了年月日はYYYY/MM/DDで入力してください。',
+          error: '開始年月日と終了年月日はyyyy/MM/ddで入力してください。',
         });
       } else {
         this.props.history.push({
