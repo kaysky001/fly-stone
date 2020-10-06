@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ResumeEditConf extends Component {
   backClick = () => {
@@ -22,13 +23,11 @@ class ResumeEditConf extends Component {
               >
                 戻る
               </button>
-              <button
-                type="button"
-                className="btn btn-warning btn-sm rounded-pill"
-                id="logout"
-              >
-                ログアウト
-              </button>
+              <Link to="/logout">
+                <button type="button" className="btn btn-warning btn-sm rounded-pill" id="logout">
+                  ログアウト
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -49,9 +48,7 @@ class ResumeEditConf extends Component {
             </div>
             <div className="row">
               <div className="col-lg-12">
-                <label for="retire_date">
-                  プロジェクト名:証券取引管理システム
-                </label>
+                <label for="retire_date">プロジェクト名:証券取引管理システム</label>
               </div>
             </div>
             <div className="row">
@@ -75,11 +72,7 @@ class ResumeEditConf extends Component {
               </div>
             </div>
             <div className="text-center">
-              <button
-                type="button"
-                className="mr-3 btn btn-success btn-sm rounded-pill"
-                id="resumeEditDone"
-              >
+              <button type="button" className="mr-3 btn btn-success btn-sm rounded-pill" id="resumeEditDone">
                 修正
               </button>
             </div>

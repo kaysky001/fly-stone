@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 function ResumeWriteComp() {
   return (
@@ -11,13 +12,11 @@ function ResumeWriteComp() {
         </div>
         <div className="col-lg-4">
           <div className="text-center">
-            <button
-              type="button"
-              className="btn btn-warning btn-sm rounded-pill"
-              id="logout"
-            >
-              ログアウト
-            </button>
+            <Link to="/logout">
+              <button type="button" className="btn btn-warning btn-sm rounded-pill" id="logout">
+                ログアウト
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -34,4 +33,4 @@ function ResumeWriteComp() {
     </div>
   );
 }
-export default ResumeWriteComp;
+export default withRouter(ResumeWriteComp);

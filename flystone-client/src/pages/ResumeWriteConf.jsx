@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 //職歴登録確認画面
 class ResumeWriteConf extends Component {
@@ -35,7 +36,7 @@ class ResumeWriteConf extends Component {
     axios
       .post('http://localhost:8888/api/v1/resume', data)
       .then((response) => {
-        this.props.history.push('http://localhost:3000/resume/write/comp');
+        this.props.history.push('/resume/write/comp');
       })
       .catch(function (error) {
         console.log(error);
@@ -60,9 +61,11 @@ class ResumeWriteConf extends Component {
               >
                 戻る
               </button>
-              <button type="button" className="btn btn-warning btn-sm rounded-pill" id="logout">
-                ログアウト
-              </button>
+              <Link to="/logout">
+                <button type="button" className="btn btn-warning btn-sm rounded-pill" id="logout">
+                  ログアウト
+                </button>
+              </Link>
             </div>
           </div>
         </div>

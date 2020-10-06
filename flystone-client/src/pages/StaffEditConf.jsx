@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function StaffEditConf() {
   return (
@@ -10,20 +11,14 @@ function StaffEditConf() {
         </div>
         <div className="col-lg-4">
           <div className="text-center">
-            <button
-              type="button"
-              className="mr-3 btn btn-secondary btn-sm rounded-pill"
-              id="staffEdit"
-            >
+            <button type="button" className="mr-3 btn btn-secondary btn-sm rounded-pill" id="staffEdit">
               戻る
             </button>
-            <button
-              type="button"
-              className="btn btn-warning btn-sm rounded-pill"
-              id="logout"
-            >
-              ログアウト
-            </button>
+            <Link to="/logout">
+              <button type="button" className="btn btn-warning btn-sm rounded-pill" id="logout">
+                ログアウト
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -84,11 +79,7 @@ function StaffEditConf() {
         </div>
       </div>
       <div className="text-center">
-        <button
-          type="button"
-          className="btn btn-success btn-sm rounded-pill"
-          id="staffDone"
-        >
+        <button type="button" className="btn btn-success btn-sm rounded-pill" id="staffDone">
           更新
         </button>
       </div>

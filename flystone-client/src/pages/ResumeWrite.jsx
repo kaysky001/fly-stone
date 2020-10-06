@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ResumeWrite extends Component {
   //入力情報を保持するstate
@@ -152,9 +153,11 @@ class ResumeWrite extends Component {
               >
                 戻る
               </button>
-              <button type="button" className="btn btn-warning btn-sm rounded-pill" id="logout">
-                ログアウト
-              </button>
+              <Link to="/logout">
+                <button type="button" className="btn btn-warning btn-sm rounded-pill" id="logout">
+                  ログアウト
+                </button>
+              </Link>
             </div>
           </div>
         </div>
