@@ -19,6 +19,15 @@ class ResumeWriteConf extends Component {
       remarks: this.props.location.state.remarks,
     };
   }
+  // //セッションタイムアウト設定
+  // timer = null;
+  // componentDidMount() {
+  //   timer = setTimeout(() => this.props.history.push('/error/system'), 60000);
+  // }
+  // componentWillUnmount() {
+  //   clearTimeout(timer);
+  // }
+
   backClick = () => {
     this.props.history.goBack();
   };

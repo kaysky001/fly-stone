@@ -5,7 +5,7 @@ const Resume = require("../models/ResumeAPI");
 module.exports = {
     //職務履歴テーブルに登録
     create: (req, res, next) => {
-        if (!req.body) {
+        if (!Object.keys(req.body).length) {
             res.status(400).send({
                 message: "登録情報なし！",
             });
@@ -16,7 +16,7 @@ module.exports = {
             })
             .catch((error) => {
                 res.status(500).send({
-                    message: error.message || "何らかのエラーです。",
+                    message: "何らかのエラーです。",
                 });
             });
     },
@@ -34,63 +34,64 @@ module.exports = {
     },
     //職員の指定の職務履歴を取得
     findOne: (req, res) => {
-        Resume.findOne(req.params.staffNumber)
+        var staffNumber = req.params.id;
+        Resume.findOne(staffNumber)
             .then((result) => {
-                res.send(result);
-            })
-            .catch((err) => {
-                if (err.kind === "not_found") {
+                if (result.length === 0) {
                     res.status(404).send({
-                        message: `該当職員番号は見つかりませんでした。 ${req.params.staffNumber}.`,
+                        message: `該当職員番号は見つかりませんでした。 ${staffNumber}.`,
                     });
                 } else {
-                    res.status(500).send({
-                        message: " 取得エラーです。" + req.params.employeeId,
-                    });
+                    res.send(result);
                 }
+            })
+            .catch((err) => {
+                res.status(500).send({
+                    message: " 取得エラーです。" + req.params.id,
+                });
             });
     },
     //職務履歴を更新
     update: (req, res, next) => {
-        var { staffNumber } = req.params.id;
-        if (!req.body) {
+        var staffNumber = req.params.id;
+        if (!Object.keys(req.body).length) {
             res.status(400).send({
                 message: "更新情報なし",
             });
         }
-        Resume.update(staffNumber)
+        Resume.update(req.body, staffNumber)
             .then((result) => {
-                res.send(result);
-            })
-            .catch((err) => {
-                if (err.kind === "not_found") {
+                if (result.changedRows === 0) {
                     res.status(404).send({
                         message: `対象は見つかりませんでした。 ${staffNumber}.`,
                     });
                 } else {
-                    res.status(500).send({
-                        message: "更新エラーです。 " + staffNumber,
-                    });
+                    res.send(result);
                 }
+            })
+            .catch((err) => {
+                res.status(500).send({
+                    message: "更新エラーです。 " + staffNumber,
+                });
             });
     },
     //職務履歴を削除
     delete: (req, res, next) => {
-        var { staffNumber } = req.params.id;
-        Resume.delete(staffNumber)
+        var staffNumber = req.params.id;
+        Resume.delete(req.body, staffNumber)
             .then((result) => {
-                res.send({ message: `削除成功` });
-            })
-            .catch((err) => {
-                if (err.kind === "not_found") {
+                if (result.affectedRows === 0) {
                     res.status(404).send({
-                        message: `対象は見つかりませんでした。 ${staffNumber}.`,
+                        message: `該当職員番号は見つかりませんでした。 ${staffNumber}.`,
                     });
                 } else {
-                    res.status(500).send({
-                        message: "削除エラーです。 " + staffNumber,
-                    });
+                    res.send(result);
                 }
+            })
+            .catch((err) => {
+                res.status(500).send({
+                    message: "削除エラーです。 " + staffNumber,
+                });
             });
     },
     //すべての職務履歴を削除する
