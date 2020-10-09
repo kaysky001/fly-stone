@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 class StaffInfo extends Component {
   //stateの初期設定
@@ -14,10 +14,10 @@ class StaffInfo extends Component {
   }
   //データベースから情報を取得する
   componentDidMount() {
-    axios.get("/staff").then((res) => {
+    axios.get('/staff').then((res) => {
       this.setState({ staff: res.data });
     });
-    axios.get("/resume").then((res) => {
+    axios.get('/resume').then((res) => {
       this.setState({ resumes: res.data });
     });
   }
@@ -35,17 +35,10 @@ class StaffInfo extends Component {
           </div>
           <div className="col-lg-7">
             <div className="text-center">
-              <button
-                type="button"
-                className="mr-3 btn btn-warning btn-sm rounded-pill"
-                onClick={this.backClick}
-              >
+              <button type="button" className="mr-3 btn btn-warning btn-sm rounded-pill" onClick={this.backClick}>
                 戻る
               </button>
-              <button
-                type="button"
-                className="mr-3 btn btn-danger btn-sm rounded-pill"
-              >
+              <button type="button" className="mr-3 btn btn-danger btn-sm rounded-pill">
                 削除
               </button>
               <button
@@ -56,27 +49,15 @@ class StaffInfo extends Component {
               >
                 個人情報書類
               </button>
-              <button
-                type="submit"
-                className="mr-3 btn btn-sm btn-primary rounded-pill"
-                id="pdfOutput"
-              >
+              <button type="submit" className="mr-3 btn btn-sm btn-primary rounded-pill" id="pdfOutput">
                 出力
               </button>
               <Link to="/staff/edit">
-                <button
-                  type="button"
-                  className="mr-3 btn btn-success btn-sm rounded-pill"
-                  id="staffEdit"
-                >
+                <button type="button" className="mr-3 btn btn-success btn-sm rounded-pill" id="staffEdit">
                   修正
                 </button>
               </Link>
-              <button
-                type="button"
-                className="btn btn-warning btn-sm rounded-pill "
-                id="logout"
-              >
+              <button type="button" className="btn btn-warning btn-sm rounded-pill " id="logout">
                 ログアウト
               </button>
             </div>
@@ -118,30 +99,28 @@ class StaffInfo extends Component {
           <table className="table table-bordered table-sm">
             <tbody>
               <tr>
-                <td style={{ width: "15%" }} className="bg-info text-light">
+                <td style={{ width: '15%' }} className="bg-info text-light">
                   採用年月日
                 </td>
-                <td style={{ width: "85%" }}> {this.state.staff.hireDate} </td>
+                <td style={{ width: '85%' }}> {this.state.staff.hireDate} </td>
               </tr>
               <tr>
-                <td style={{ width: "15%" }} className="bg-info text-light">
+                <td style={{ width: '15%' }} className="bg-info text-light">
                   採用事由
                 </td>
-                <td style={{ width: "85%" }}>{this.state.staff.hireReason} </td>
+                <td style={{ width: '85%' }}>{this.state.staff.hireReason} </td>
               </tr>
               <tr>
-                <td style={{ width: "15%" }} className="bg-info text-light">
+                <td style={{ width: '15%' }} className="bg-info text-light">
                   退職年月日
                 </td>
-                <td style={{ width: "85%" }}>{this.state.staff.retireDate} </td>
+                <td style={{ width: '85%' }}>{this.state.staff.retireDate} </td>
               </tr>
               <tr>
-                <td style={{ width: "15%" }} className="bg-info text-light">
+                <td style={{ width: '15%' }} className="bg-info text-light">
                   退職事由
                 </td>
-                <td style={{ width: "85%" }}>
-                  {this.state.staff.retireReason}
-                </td>
+                <td style={{ width: '85%' }}>{this.state.staff.retireReason}</td>
               </tr>
             </tbody>
           </table>
@@ -152,28 +131,28 @@ class StaffInfo extends Component {
           <table className="table table-bordered table-sm">
             <tbody>
               <tr>
-                <td style={{ width: "15%" }} className="bg-info text-light">
+                <td style={{ width: '15%' }} className="bg-info text-light">
                   本務異動日
                 </td>
-                <td style={{ width: "85%" }}>{this.state.staff.birthday}</td>
+                <td style={{ width: '85%' }}>{this.state.staff.birthday}</td>
               </tr>
               <tr>
-                <td style={{ width: "15%" }} className="bg-info text-light">
+                <td style={{ width: '15%' }} className="bg-info text-light">
                   異動事由
                 </td>
-                <td style={{ width: "85%" }}>{this.state.staff.birthday}</td>
+                <td style={{ width: '85%' }}>{this.state.staff.birthday}</td>
               </tr>
               <tr>
-                <td style={{ width: "15%" }} className="bg-info text-light">
+                <td style={{ width: '15%' }} className="bg-info text-light">
                   職級
                 </td>
-                <td style={{ width: "88%" }}>{this.state.staff.birthday} </td>
+                <td style={{ width: '88%' }}>{this.state.staff.birthday} </td>
               </tr>
               <tr>
-                <td style={{ width: "15%" }} className="bg-info text-light">
+                <td style={{ width: '15%' }} className="bg-info text-light">
                   職位
                 </td>
-                <td style={{ width: "85%" }}>{this.state.staff.birthday}</td>
+                <td style={{ width: '85%' }}>{this.state.staff.birthday}</td>
               </tr>
             </tbody>
           </table>
@@ -186,11 +165,7 @@ class StaffInfo extends Component {
             <div className="col-lg-4">
               <div className="text-center">
                 <Link to="/resume/write">
-                  <button
-                    type="button"
-                    className="mr-3 btn btn-success btn-sm rounded-pill"
-                    id="resumeWrite"
-                  >
+                  <button type="button" className="mr-3 btn btn-success btn-sm rounded-pill" id="resumeWrite">
                     登録
                   </button>
                 </Link>
@@ -213,9 +188,9 @@ class StaffInfo extends Component {
               </tr>
             </thead>
             <tbody>
-              {/*職歴情報の一覧表示 */}
+              {/* 職歴情報の一覧表示 */}
 
-              {/* {this.state.resumes.map((resume, i) => (
+              {this.state.resumes.map((resume, i) => (
                 <tr key={i}>
                   <td> {resume.staff_number} </td>
                   <td> {resume.start_date} </td>
@@ -227,25 +202,17 @@ class StaffInfo extends Component {
                   <td> {resume.near_station}</td>
                   <td> {resume.remarks}</td>
                   <td>
-                    <button
-                      type="button"
-                      className="btn btn-success btn-sm rounded-pill"
-                      id="resumeEdit"
-                    >
+                    <button type="button" className="btn btn-success btn-sm rounded-pill" id="resumeEdit">
                       修正
                     </button>
                   </td>
                   <td>
-                    <button
-                      type="button"
-                      className="btn btn-danger btn-sm rounded-pill"
-                      id="resumeEdit"
-                    >
+                    <button type="button" className="btn btn-danger btn-sm rounded-pill" id="resumeEdit">
                       削除
                     </button>
                   </td>
                 </tr>
-              ))} */}
+              ))}
             </tbody>
           </table>
         </form>

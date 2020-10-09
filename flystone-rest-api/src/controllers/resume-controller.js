@@ -6,8 +6,12 @@ module.exports = {
     //職務履歴テーブルに登録
     create: (req, res, next) => {
         if (!Object.keys(req.body).length) {
-            res.status(400).send({
+            return res.status(400).send({
                 message: "登録情報なし！",
+            });
+        } else if (req.body.startDate === null || req.body.endDate === null) {
+            return res.status(500).send({
+                message: "登録エラーです。 ",
             });
         }
         Resume.create(req.body)
@@ -16,7 +20,7 @@ module.exports = {
             })
             .catch((error) => {
                 res.status(500).send({
-                    message: "何らかのエラーです。",
+                    message: error.message || "何らかのエラーです。",
                 });
             });
     },
@@ -55,8 +59,17 @@ module.exports = {
     update: (req, res, next) => {
         var staffNumber = req.params.id;
         if (!Object.keys(req.body).length) {
-            res.status(400).send({
+            return res.status(400).send({
                 message: "更新情報なし",
+            });
+        } else if (
+            req.body.startDate === null ||
+            req.body.endDate === null ||
+            req.body.startDate === "0000/00/00" ||
+            req.body.endDate === "0000/00/00"
+        ) {
+            return res.status(500).send({
+                message: "更新エラーです。 " + staffNumber,
             });
         }
         Resume.update(req.body, staffNumber)
