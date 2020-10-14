@@ -17,6 +17,7 @@ class ResumeWriteConf extends Component {
       project: this.props.location.state.project,
       nearStation: this.props.location.state.nearStation,
       remarks: this.props.location.state.remarks,
+      createDate: this.props.location.state.createDate,
     };
   }
   // //セッションタイムアウト設定
@@ -45,7 +46,7 @@ class ResumeWriteConf extends Component {
     axios
       .post('http://localhost:8888/api/v1/resume', data)
       .then((response) => {
-        this.props.history.push('/resume/write/comp');
+        this.props.history.push('/resume/edit/comp');
       })
       .catch((error) => {
         this.props.history.push('/error/system');

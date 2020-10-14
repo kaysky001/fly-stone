@@ -82,5 +82,8 @@ router.put("/resume/:id", resumeController.update);
 router.delete("/resume/:id", resumeController.delete);
 /* 職歴全削除 */
 router.delete("/resume", resumeController.deleteAll);
+//pdf作成
+var pdfController = require("../src/controllers/pdf");
+router.get("/pdf", pdfController.pdfCreate);
 
 module.exports = router;

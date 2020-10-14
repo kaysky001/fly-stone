@@ -65,9 +65,9 @@ module.exports = {
             sql.query(
                 `UPDATE ${table} 
                 SET start_date = "${body.startDate}",end_date = "${body.endDate}",work_place = "${body.workPlace}",
-                project = "${body.project}",job_role = "${body.jobRole}",customer = "${body.customer}",
+                project = "${body.project}",job_role = "${body.position}",customer = "${body.customer}",
                 near_station = "${body.nearStation}",remarks = "${body.remarks}",update_date = "${updateDate}",
-                update_id = "${body.updateId}" 
+                update_id = "${staffNumber}" 
                 WHERE staff_number = "${staffNumber}" AND create_date = "${body.createDate}"`,
                 (err, result, fields) => {
                     if (err) {

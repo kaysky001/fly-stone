@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import ModalWindow from '../components/ModalWindow';
+//時刻取得のため
+var DateFormat = require('dateformat');
 
 class StaffInfo extends Component {
   //stateの初期設定
@@ -9,21 +12,50 @@ class StaffInfo extends Component {
     this.state = {
       staff: [],
       resumes: [],
-      loading: false,
     };
   }
+
   //データベースから情報を取得する
   componentDidMount() {
-    axios.get('/staff').then((res) => {
-      this.setState({ staff: res.data });
-    });
-    axios.get('/resume').then((res) => {
+    // axios.get('http://localhost:8888/api/v1/staff').then((res) => {
+    //   this.setState({ staff: res.data });
+    // });
+    axios.get('http://localhost:8888/api/v1/resume').then((res) => {
       this.setState({ resumes: res.data });
     });
   }
   //前の画面に戻る
   backClick = () => {
     this.props.history.goBack();
+  };
+  //確認画面にstateを送信する。
+  handleClick = (resume) => {
+    this.createDay(resume, resume.create_date);
+    this.props.history.push({
+      pathname: '/resume/edit',
+      state: {
+        resume: resume,
+      },
+    });
+  };
+  pdfClick = () => {
+    axios
+      .get('http://localhost:8888/api/v1/pdf')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  startDay = (resume, day) => {
+    resume.start_date = DateFormat(day, 'yyyy/mm/dd');
+  };
+  endDay = (resume, day) => {
+    resume.end_date = DateFormat(day, 'yyyy/mm/dd');
+  };
+  createDay = (resume, day) => {
+    resume.create_date = DateFormat(day, 'yyyy/mm/dd HH:MM:ss');
   };
   const;
   render() {
@@ -41,15 +73,13 @@ class StaffInfo extends Component {
               <button type="button" className="mr-3 btn btn-danger btn-sm rounded-pill">
                 削除
               </button>
+              <ModalWindow></ModalWindow>
               <button
-                type="button"
-                className="mr-3 btn btn-primary btn-sm rounded-pill"
-                data-toggle="modal"
-                data-target="#modal"
+                type="submit"
+                className="mr-3 btn btn-sm btn-primary rounded-pill"
+                onClick={this.pdfClick}
+                id="pdfOutput"
               >
-                個人情報書類
-              </button>
-              <button type="submit" className="mr-3 btn btn-sm btn-primary rounded-pill" id="pdfOutput">
                 出力
               </button>
               <Link to="/staff/edit">
@@ -192,9 +222,14 @@ class StaffInfo extends Component {
 
               {this.state.resumes.map((resume, i) => (
                 <tr key={i}>
-                  <td> {resume.staff_number} </td>
-                  <td> {resume.start_date} </td>
-                  <td> {resume.end_date}</td>
+                  <td>
+                    {this.startDay(resume, resume.start_date)}
+                    {resume.start_date}
+                  </td>
+                  <td>
+                    {this.endDay(resume, resume.end_date)}
+                    {resume.end_date}
+                  </td>
                   <td> {resume.work_place}</td>
                   <td> {resume.project}</td>
                   <td> {resume.job_role}</td>
@@ -202,7 +237,12 @@ class StaffInfo extends Component {
                   <td> {resume.near_station}</td>
                   <td> {resume.remarks}</td>
                   <td>
-                    <button type="button" className="btn btn-success btn-sm rounded-pill" id="resumeEdit">
+                    <button
+                      type="button"
+                      className="btn btn-success btn-sm rounded-pill"
+                      id="resumeEdit"
+                      onClick={() => this.handleClick(resume)}
+                    >
                       修正
                     </button>
                   </td>
@@ -216,89 +256,6 @@ class StaffInfo extends Component {
             </tbody>
           </table>
         </form>
-        {/* <div
-                                                                                                                                                                                                                                                                        className="modal fade"
-                                                                                                                                                                                                                                                                        id="modal"
-                                                                                                                                                                                                                                                                        tabindex="-1"
-                                                                                                                                                                                                                                                                        role="dialog"
-                                                                                                                                                                                                                                                                        aria-labelledby="exampleModalLabel"
-                                                                                                                                                                                                                                                                        aria-hidden="true"
-                                                                                                                                                                                                                                                                      >
-                                                                                                                                                                                                                                                                        <div className="modal-dialog" role="document">
-                                                                                                                                                                                                                                                                          <div className="modal-content">
-                                                                                                                                                                                                                                                                            <div className="modal-header">
-                                                                                                                                                                                                                                                                              <h5 className="modal-title" id="exampleModalLabel">
-                                                                                                                                                                                                                                                                                本人書類
-                                                                                                                                                                                                                                                                              </h5>
-                                                                                                                                                                                                                                                                              <button
-                                                                                                                                                                                                                                                                                type="button"
-                                                                                                                                                                                                                                                                                className="close"
-                                                                                                                                                                                                                                                                                data-dismiss="modal"
-                                                                                                                                                                                                                                                                                aria-label="Close"
-                                                                                                                                                                                                                                                                              >
-                                                                                                                                                                                                                                                                                <span aria-hidden="true">&times;</span>
-                                                                                                                                                                                                                                                                              </button>
-                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                            <div className="modal-body">
-                                                                                                                                                                                                                                                                              <div id="case">
-                                                                                                                                                                                                                                                                                <div className="container">
-                                                                                                                                                                                                                                                                                  <div className="row">
-                                                                                                                                                                                                                                                                                    <div className="col-sm-12 col-md-6">
-                                                                                                                                                                                                                                                                                      <div className="card">
-                                                                                                                                                                                                                                                                                        <h8 className="card-title">書類①　免許証</h8>
-                                                                                                                                                                                                                                                                                        <img
-                                                                                                                                                                                                                                                                                          className="card-img"
-                                                                                                                                                                                                                                                                                          src="../common/img/case1.jpg"
-                                                                                                                                                                                                                                                                                          alt=" "
-                                                                                                                                                                                                                                                                                        />
-                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                    <div className="col-sm-12 col-md-6">
-                                                                                                                                                                                                                                                                                      <div className="card">
-                                                                                                                                                                                                                                                                                        <h8 className="card-title">書類②　会員証</h8>
-                                                                                                                                                                                                                                                                                        <img
-                                                                                                                                                                                                                                                                                          className="card-img"
-                                                                                                                                                                                                                                                                                          src="../common/img/case2.jpg"
-                                                                                                                                                                                                                                                                                          alt=" "
-                                                                                                                                                                                                                                                                                        />
-                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                    <div className="col-sm-12 col-md-6">
-                                                                                                                                                                                                                                                                                      <div className="card">
-                                                                                                                                                                                                                                                                                        <h8 className="card-title">書類③　印鑑登録証明書</h8>
-                                                                                                                                                                                                                                                                                        <img
-                                                                                                                                                                                                                                                                                          className="card-img"
-                                                                                                                                                                                                                                                                                          src="../common/img/case3.jpg"
-                                                                                                                                                                                                                                                                                          alt=" "
-                                                                                                                                                                                                                                                                                        />
-                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                    <div className="col-sm-12 col-md-6">
-                                                                                                                                                                                                                                                                                      <div className="card">
-                                                                                                                                                                                                                                                                                        <h8 className="card-title">書類④　在留カード</h8>
-                                                                                                                                                                                                                                                                                        <img
-                                                                                                                                                                                                                                                                                          className="card-img"
-                                                                                                                                                                                                                                                                                          src="../common/img/case4.jpg"
-                                                                                                                                                                                                                                                                                          alt=" "
-                                                                                                                                                                                                                                                                                        />
-                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                            <div className="modal-footer">
-                                                                                                                                                                                                                                                                              <button
-                                                                                                                                                                                                                                                                                type="button"
-                                                                                                                                                                                                                                                                                className="btn btn-primary"
-                                                                                                                                                                                                                                                                                data-dismiss="modal"
-                                                                                                                                                                                                                                                                              >
-                                                                                                                                                                                                                                                                                確認
-                                                                                                                                                                                                                                                                              </button>
-                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                      </div> */}
       </div>
     );
   }

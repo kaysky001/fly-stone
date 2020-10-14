@@ -66,7 +66,6 @@ class ResumeWrite extends Component {
       remarks: e.target.value,
     });
   }
-
   //確認画面にstateを送信する。
   handleClick() {
     let startDate = this.state.startDate;
@@ -134,7 +133,6 @@ class ResumeWrite extends Component {
   backClick = () => {
     this.props.history.goBack();
   };
-
   render() {
     return (
       <div className="container">
