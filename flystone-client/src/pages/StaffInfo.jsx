@@ -48,6 +48,7 @@ class StaffInfo extends Component {
         console.log(error);
       });
   };
+  //DB空の時間をフォーマット
   startDay = (resume, day) => {
     resume.start_date = DateFormat(day, 'yyyy/mm/dd');
   };
@@ -56,6 +57,28 @@ class StaffInfo extends Component {
   };
   createDay = (resume, day) => {
     resume.create_date = DateFormat(day, 'yyyy/mm/dd HH:MM:ss');
+  };
+  //削除アクション
+  resumeDelete = (resume) => {
+    //操作確認メッセージ
+    const confirmed = window.confirm(`選択した職務履歴を削除します`);
+    if (confirmed) {
+      //確認の場合、サーバーにリクエスト提出
+      let formatDate = DateFormat(resume.create_date, 'yyyy/mm/dd HH:MM:ss');
+      axios({
+        method: 'DELETE',
+        url: 'http://localhost:8888/api/v1/resume/' + resume.staff_number,
+        data: {
+          createDate: formatDate,
+        },
+      })
+        .then((response) => {
+          this.componentDidMount();
+        })
+        .catch((error) => {
+          this.props.history.push('/error/system');
+        });
+    }
   };
   const;
   render() {
@@ -247,7 +270,12 @@ class StaffInfo extends Component {
                     </button>
                   </td>
                   <td>
-                    <button type="button" className="btn btn-danger btn-sm rounded-pill" id="resumeEdit">
+                    <button
+                      type="button"
+                      className="btn btn-danger btn-sm rounded-pill"
+                      id="resumeEdit"
+                      onClick={() => this.resumeDelete(resume)}
+                    >
                       削除
                     </button>
                   </td>

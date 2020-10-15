@@ -6,14 +6,14 @@ class ResumeWrite extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: null,
-      endDate: null,
-      workPlace: null,
-      customer: null,
-      position: null,
-      project: null,
-      nearStation: null,
-      remarks: null,
+      startDate: '',
+      endDate: '',
+      workPlace: '',
+      customer: '',
+      position: '',
+      project: '',
+      nearStation: '',
+      remarks: '',
     };
     this.startChange = this.startChange.bind(this);
     this.endChange = this.endChange.bind(this);
